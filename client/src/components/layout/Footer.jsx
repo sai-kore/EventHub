@@ -4,11 +4,11 @@ function Footer() {
 
       <div className="mx-auto max-w-7xl px-6">
 
-        <h2 className="text-2xl font-bold">
+        <h2 className="text-2xl font-bold text-center">
           EventHub
         </h2>
 
-        <p className="mt-3 text-slate-300">
+        <p className="mt-3 text-slate-300 text-center">
           Discover and manage college events with ease.
         </p>
 
