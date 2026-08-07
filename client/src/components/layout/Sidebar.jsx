@@ -5,6 +5,7 @@ import useAuth from "../../hooks/useAuth";
 const links = [
   { name: "Dashboard", path: "/admin", icon: Home },
   { name: "Manage Events", path: "/admin/events", icon: CalendarDays },
+  { name: "Manage Users", path: "/admin/users", icon: UserCircle },
   { name: "Create Event", path: "/admin/events/create", icon: PlusCircle },
   { name: "Profile", path: "/profile", icon: UserCircle },
 ];

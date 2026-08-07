@@ -2,8 +2,11 @@ import { Link } from "react-router-dom";
 import Layout from "../components/layout/Layout";
 import FeaturedEvents from "../components/common/FeaturedEvents"; // Adjust import path if needed
 import { ShieldCheck, Zap, Ticket, Mail, Info, ArrowRight, Sparkles } from "lucide-react";
+import useAuth from "../hooks/useAuth";
 
 export default function Landing() {
+  const { user } = useAuth();
+
   return (
     <Layout>
       {/* Hero Section */}
@@ -28,6 +31,14 @@ export default function Landing() {
             >
               Explore Events <ArrowRight size={18} />
             </Link>
+            {user?.role === "admin" && (
+              <Link
+                to="/admin"
+                className="inline-flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-semibold px-6 py-3.5 rounded-xl shadow transition"
+              >
+                Go to Admin Panel
+              </Link>
+            )}
           </div>
         </div>
       </section>

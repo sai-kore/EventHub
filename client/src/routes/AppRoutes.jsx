@@ -16,6 +16,7 @@ import MyEvents from "../pages/MyEvents";
 import EventDetails from "../pages/attendee/EventDetails";
 import Profile from "../pages/Profile";
 import Events from "../pages/Events";
+import ManageUsers from "../pages/admin/ManageUsers";
 
 import ProtectedRoute from "./ProtectedRoute";
 
@@ -69,6 +70,15 @@ function AppRoutes() {
           element={
             <ProtectedRoute adminOnly>
               <EventParticipants />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/admin/users"
+          element={
+            <ProtectedRoute adminOnly>
+              <ManageUsers />
             </ProtectedRoute>
           }
         />

@@ -60,3 +60,32 @@ exports.getAdminStats = async (req, res) => {
     res.status(500).json({ message: "Failed to fetch dashboard statistics" });
   }
 };
+
+exports.getUsers = async (req, res) => {
+  try {
+    const users = await User.find().select("name email role createdAt").sort({ createdAt: -1 });
+    res.json({ users });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch users" });
+  }
+};
+
+exports.updateUserRole = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { role } = req.body;
+    if (!["attendee", "admin"].includes(role)) {
+      return res.status(400).json({ message: "Invalid role" });
+    }
+
+    const user = await User.findById(id);
+    if (!user) return res.status(404).json({ message: "User not found" });
+
+    user.role = role;
+    await user.save();
+
+    res.json({ message: "User role updated", user: { _id: user._id, name: user.name, email: user.email, role: user.role } });
+  } catch (error) {
+    res.status(500).json({ message: "Failed to update user role" });
+  }
+};
