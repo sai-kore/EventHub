@@ -47,6 +47,70 @@ exports.getAdminStats = async (req, res) => {
     const totalRegistrations = await Registration.countDocuments();
     const latestEvents = await Event.find().sort({ createdAt: -1 }).limit(5);
 
+    const registrationsByEvent = await Registration.aggregate([
+      {
+        $group: {
+          _id: "$event",
+          registrationCount: { $sum: 1 },
+        },
+      },
+      {
+        $lookup: {
+          from: "events",
+          localField: "_id",
+          foreignField: "_id",
+          as: "event",
+        },
+      },
+      { $unwind: { path: "$event", preserveNullAndEmptyArrays: true } },
+      {
+        $project: {
+          _id: 0,
+          eventId: "$_id",
+          eventTitle: "$event.title",
+          registrationCount: 1,
+        },
+      },
+      { $sort: { registrationCount: -1 } },
+    ]);
+
+    const registrationTrends = await Registration.aggregate([
+      {
+        $group: {
+          _id: {
+            year: { $year: "$createdAt" },
+            month: { $month: "$createdAt" },
+          },
+          count: { $sum: 1 },
+        },
+      },
+      {
+        $sort: {
+          "_id.year": 1,
+          "_id.month": 1,
+        },
+      },
+      {
+        $project: {
+          _id: 0,
+          period: {
+            $concat: [
+              { $toString: "$_id.year" },
+              "-",
+              {
+                $cond: [
+                  { $lt: ["$_id.month", 10] },
+                  { $concat: ["0", { $toString: "$_id.month" }] },
+                  { $toString: "$_id.month" },
+                ],
+              },
+            ],
+          },
+          count: 1,
+        },
+      },
+    ]);
+
     res.json({
       stats: {
         totalEvents,
@@ -55,6 +119,8 @@ exports.getAdminStats = async (req, res) => {
         activeEvents: totalEvents,
       },
       latestEvents,
+      registrationsByEvent,
+      registrationTrends,
     });
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch dashboard statistics" });

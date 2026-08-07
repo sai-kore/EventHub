@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, Link } from "react-router-dom";
 
 import Layout from "../../components/layout/Layout";
 import Loader from "../../components/ui/Loader";
@@ -104,8 +104,16 @@ function EventDetails() {
         </div>
 
         {isRegistered ? (
-          <div className="mt-8 p-4 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-xl font-semibold text-center">
-            ✓ You are registered for this event! Check "My Events" for your ticket pass.
+          <div className="mt-8 grid gap-3">
+            <div className="p-4 bg-emerald-50 border border-emerald-200 text-emerald-700 rounded-xl font-semibold text-center">
+              ✓ You are registered for this event!
+            </div>
+            <Link
+              to="/my-events"
+              className="inline-flex items-center justify-center gap-2 bg-slate-900 hover:bg-slate-800 text-white font-semibold px-6 py-3 rounded-xl transition mx-auto"
+            >
+              View Ticket Pass
+            </Link>
           </div>
         ) : (
           <Button onClick={handleRegister} className="mt-8 bg-blue-600 hover:bg-blue-700 text-white font-semibold px-8 py-3.5 rounded-xl">

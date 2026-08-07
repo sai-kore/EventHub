@@ -60,8 +60,23 @@ export default function Navbar() {
         <div className="flex items-center gap-4">
           {user ? (
             <div className="flex items-center gap-4">
+              {user.role === "admin" ? (
+                <Link
+                  to="/admin/dashboard"
+                  className="text-sm font-semibold text-gray-800 hover:text-blue-600"
+                >
+                  Admin Dashboard
+                </Link>
+              ) : (
+                <Link
+                  to="/my-events"
+                  className="text-sm font-semibold text-gray-800 hover:text-blue-600"
+                >
+                  My Events
+                </Link>
+              )}
               <Link
-                to={user.role === "admin" ? "/admin/dashboard" : "/my-events"}
+                to="/profile"
                 className="text-sm font-semibold text-gray-800 hover:text-blue-600"
               >
                 Hi, {user.name}

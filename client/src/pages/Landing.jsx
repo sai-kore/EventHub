@@ -31,14 +31,21 @@ export default function Landing() {
             >
               Explore Events <ArrowRight size={18} />
             </Link>
-            {user?.role === "admin" && (
+            {user?.role === "admin" ? (
               <Link
                 to="/admin"
                 className="inline-flex items-center justify-center gap-2 bg-slate-800 hover:bg-slate-700 text-white font-semibold px-6 py-3.5 rounded-xl shadow transition"
               >
                 Go to Admin Panel
               </Link>
-            )}
+            ) : user ? (
+              <Link
+                to="/my-events"
+                className="inline-flex items-center justify-center gap-2 bg-emerald-600 hover:bg-emerald-700 text-white font-semibold px-6 py-3.5 rounded-xl shadow transition"
+              >
+                My Events
+              </Link>
+            ) : null}
           </div>
         </div>
       </section>

@@ -41,6 +41,9 @@ export default function MyEvents() {
   const upcomingEvents = registrations.filter(
     (r) => r.event?.date && new Date(r.event.date) > new Date()
   );
+  const completedEvents = registrations.filter(
+    (r) => r.event?.date && new Date(r.event.date) <= new Date()
+  );
   const nextEvent = upcomingEvents.sort(
     (a, b) => new Date(a.event.date) - new Date(b.event.date)
   )[0];
@@ -94,48 +97,122 @@ export default function MyEvents() {
             <p className="text-gray-500">You have not registered for any events yet.</p>
           </div>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {registrations.map((reg) => (
-              <div
-                key={reg._id}
-                className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-md transition flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex justify-between items-start mb-3">
-                    <span className="text-xs font-semibold uppercase px-2.5 py-1 bg-blue-50 text-blue-600 rounded-md">
-                      {reg.event?.category || "General"}
-                    </span>
-                    <span className="text-xs text-emerald-600 font-semibold bg-emerald-50 px-2 py-0.5 rounded">
-                      Confirmed
-                    </span>
+          <>
+            <div className="grid gap-6 lg:grid-cols-2">
+              <div className="bg-white border rounded-2xl p-6 shadow-sm">
+                <h2 className="text-xl font-semibold mb-4">Upcoming Events</h2>
+                {upcomingEvents.length === 0 ? (
+                  <p className="text-gray-500">No upcoming events.</p>
+                ) : (
+                  <div className="space-y-4">
+                    {upcomingEvents.map((reg) => (
+                      <div key={reg._id} className="rounded-2xl border p-4">
+                        <div className="flex items-start justify-between gap-4">
+                          <div>
+                            <p className="text-sm text-gray-500">{new Date(reg.event.date).toLocaleDateString()}</p>
+                            <h3 className="font-semibold text-lg">{reg.event.title}</h3>
+                          </div>
+                          <span className="text-xs uppercase tracking-wide text-emerald-700 bg-emerald-50 px-2 py-1 rounded-full">
+                            Upcoming
+                          </span>
+                        </div>
+                        <p className="text-sm text-gray-500 mt-2">{reg.event.venue || reg.event.location}</p>
+                        <div className="mt-4 flex items-center gap-2">
+                          <button
+                            onClick={() => setSelectedTicket(reg)}
+                            className="text-sm font-semibold text-blue-600 hover:text-blue-700"
+                          >
+                            View Ticket Pass
+                          </button>
+                          <button
+                            onClick={() => handleCancelRegistration(reg.event._id)}
+                            className="text-sm font-semibold text-rose-600 hover:text-rose-700"
+                          >
+                            Cancel Registration
+                          </button>
+                        </div>
+                      </div>
+                    ))}
                   </div>
-                  <h3 className="font-bold text-xl mb-2">{reg.event?.title || "Event Title"}</h3>
-                  <p className="text-sm text-gray-500 flex items-center gap-2 mb-4">
-                    <Calendar size={16} />
-                    {reg.event?.date ? new Date(reg.event.date).toLocaleDateString() : "Date N/A"}
-                  </p>
-                </div>
-
-                <div className="flex gap-2 pt-4 border-t mt-4">
-                  <button
-                    onClick={() => setSelectedTicket(reg)}
-                    className="flex-1 flex items-center justify-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold py-2.5 rounded-xl transition cursor-pointer"
-                  >
-                    <Ticket size={14} /> View Pass
-                  </button>
-                  {reg.event?._id && (
-                    <button
-                      onClick={() => handleCancelRegistration(reg.event._id)}
-                      className="flex items-center justify-center p-2 text-rose-600 hover:bg-rose-50 border border-rose-200 rounded-xl transition cursor-pointer"
-                      title="Cancel Registration"
-                    >
-                      <Trash2 size={16} />
-                    </button>
-                  )}
-                </div>
+                )}
               </div>
-            ))}
-          </div>
+
+              <div className="bg-white border rounded-2xl p-6 shadow-sm">
+                <h2 className="text-xl font-semibold mb-4">Completed Events</h2>
+                {completedEvents.length === 0 ? (
+                  <p className="text-gray-500">No completed events yet.</p>
+                ) : (
+                  <div className="space-y-4">
+                    {completedEvents.map((reg) => (
+                      <div key={reg._id} className="rounded-2xl border p-4">
+                        <div className="flex items-start justify-between gap-4">
+                          <div>
+                            <p className="text-sm text-gray-500">{new Date(reg.event.date).toLocaleDateString()}</p>
+                            <h3 className="font-semibold text-lg">{reg.event.title}</h3>
+                          </div>
+                          <span className="text-xs uppercase tracking-wide text-slate-700 bg-slate-100 px-2 py-1 rounded-full">
+                            Completed
+                          </span>
+                        </div>
+                        <p className="text-sm text-gray-500 mt-2">{reg.event.venue || reg.event.location}</p>
+                        <div className="mt-4 flex items-center gap-2">
+                          <button
+                            onClick={() => setSelectedTicket(reg)}
+                            className="text-sm font-semibold text-blue-600 hover:text-blue-700"
+                          >
+                            View Ticket Pass
+                          </button>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+              </div>
+            </div>
+
+            <div className="mt-10 grid md:grid-cols-2 gap-6">
+              {registrations.map((reg) => (
+                <div
+                  key={reg._id}
+                  className="bg-white border rounded-2xl p-6 shadow-sm hover:shadow-md transition flex flex-col justify-between"
+                >
+                  <div>
+                    <div className="flex justify-between items-start mb-3">
+                      <span className="text-xs font-semibold uppercase px-2.5 py-1 bg-blue-50 text-blue-600 rounded-md">
+                        {reg.event?.category || "General"}
+                      </span>
+                      <span className="text-xs text-emerald-600 font-semibold bg-emerald-50 px-2 py-0.5 rounded">
+                        Confirmed
+                      </span>
+                    </div>
+                    <h3 className="font-bold text-xl mb-2">{reg.event?.title || "Event Title"}</h3>
+                    <p className="text-sm text-gray-500 flex items-center gap-2 mb-4">
+                      <Calendar size={16} />
+                      {reg.event?.date ? new Date(reg.event.date).toLocaleDateString() : "Date N/A"}
+                    </p>
+                  </div>
+
+                  <div className="flex gap-2 pt-4 border-t mt-4">
+                    <button
+                      onClick={() => setSelectedTicket(reg)}
+                      className="flex-1 flex items-center justify-center gap-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-semibold py-2.5 rounded-xl transition cursor-pointer"
+                    >
+                      <Ticket size={14} /> View Pass
+                    </button>
+                    {reg.event?._id && (
+                      <button
+                        onClick={() => handleCancelRegistration(reg.event._id)}
+                        className="flex items-center justify-center p-2 text-rose-600 hover:bg-rose-50 border border-rose-200 rounded-xl transition cursor-pointer"
+                        title="Cancel Registration"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    )}
+                  </div>
+                </div>
+              ))}
+            </div>
+          </>
         )}
 
         {/* Ticket Pass Modal */}

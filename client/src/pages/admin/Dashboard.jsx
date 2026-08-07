@@ -8,6 +8,7 @@ import DashboardHeader from "../../components/dashboard/DashboardHeader";
 import DashboardStats from "../../components/dashboard/DashboardStats";
 import DashboardChart from "../../components/dashboard/DashboardChart";
 import RecentEvents from "../../components/dashboard/RecentEvents";
+import RegistrationTrendChart from "../../components/dashboard/RegistrationTrendChart";
 
 function Dashboard() {
   const [dashboard, setDashboard] = useState(null);
@@ -48,9 +49,12 @@ function Dashboard() {
 
         <DashboardStats stats={dashboard.stats} />
 
-        <DashboardChart events={dashboard.latestEvents} />
+        <div className="grid gap-6 lg:grid-cols-2">
+          <DashboardChart events={dashboard.registrationsByEvent || []} />
+          <RegistrationTrendChart trends={dashboard.registrationTrends || []} />
+        </div>
 
-        <RecentEvents events={dashboard.latestEvents} />
+        <RecentEvents events={dashboard.latestEvents || []} />
       </div>
     </AdminLayout>
   );
