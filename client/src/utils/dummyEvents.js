@@ -1,0 +1,58 @@
+const events = [
+  {
+    id: 1,
+    title: "Hackathon 2026",
+    category: "Technology",
+    date: "15 Sept 2026",
+    location: "Main Auditorium",
+    description: "24-hour coding competition with exciting prizes.",
+    image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=800",
+  },
+  {
+    id: 2,
+    title: "AI Workshop",
+    category: "Workshop",
+    date: "20 Sept 2026",
+    location: "Seminar Hall",
+    description: "Learn AI and Machine Learning from experts.",
+    image: "https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=800",
+  },
+  {
+    id: 3,
+    title: "Music Fest",
+    category: "Cultural",
+    date: "25 Sept 2026",
+    location: "College Ground",
+    description: "Enjoy performances from talented artists.",
+    image: "https://images.unsplash.com/photo-1501386761578-eac5c94b800a?w=800",
+  },
+  {
+    id: 4,
+    title: "Startup Expo",
+    category: "Business",
+    date: "30 Sept 2026",
+    location: "Innovation Center",
+    description: "Meet startups and explore innovative ideas.",
+    image: "https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=800",
+  },
+  {
+    id: 5,
+    title: "Robotics Challenge",
+    category: "Competition",
+    date: "5 Oct 2026",
+    location: "Lab Complex",
+    description: "Showcase your robotics skills and creativity.",
+    image: "https://images.unsplash.com/photo-1535378917042-10a22c95931a?w=800",
+  },
+  {
+    id: 6,
+    title: "Photography Contest",
+    category: "Creative",
+    date: "10 Oct 2026",
+    location: "Media Club",
+    description: "Capture the best moments and win exciting prizes.",
+    image: "https://images.unsplash.com/photo-1492691527719-9d1e07e534b4?w=800",
+  },
+];
+
+export default events;

@@ -1,0 +1,20 @@
+const express = require("express");
+const router = express.Router();
+const {
+  getEvents,
+  getEventById,
+  createEvent,
+  updateEvent,
+  deleteEvent,
+} = require("../controllers/eventController");
+const { protect, admin } = require("../middleware/authMiddleware");
+
+router.get("/", getEvents);
+router.get("/:id", getEventById);
+
+// Admin event management endpoints (also mounted under /api/admin/events)
+router.post("/", protect, admin, createEvent);
+router.put("/:id", protect, admin, updateEvent);
+router.delete("/:id", protect, admin, deleteEvent);
+
+module.exports = router;
