@@ -1,5 +1,5 @@
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import { useAuth } from "../../context/AuthContext"; // adjust import path if needed
+import { useAuth } from "../../context/AuthContext";
 import { Calendar, LogOut } from "lucide-react";
 
 export default function Navbar() {
@@ -8,7 +8,7 @@ export default function Navbar() {
   const location = useLocation();
 
   const handleNavClick = (sectionId) => {
-    // If not on home page, navigate to home page with hash
+    
     if (location.pathname !== "/") {
       navigate(`/#${sectionId}`);
       setTimeout(() => {
@@ -16,7 +16,7 @@ export default function Navbar() {
         if (element) element.scrollIntoView({ behavior: "smooth" });
       }, 100);
     } else {
-      // Smooth scroll directly if already on Home page
+      
       const element = document.getElementById(sectionId);
       if (element) element.scrollIntoView({ behavior: "smooth" });
     }

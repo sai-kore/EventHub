@@ -4,7 +4,6 @@ const User = require("../models/User");
 const protect = async (req, res, next) => {
   let token;
 
-  // Support both Bearer header and ?token= query parameter for direct CSV downloads
   if (req.headers.authorization && req.headers.authorization.startsWith("Bearer")) {
     token = req.headers.authorization.split(" ")[1];
   } else if (req.query && req.query.token) {

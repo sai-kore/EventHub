@@ -9,7 +9,7 @@ const sampleEvents = [
     title: "Global Tech Innovation Summit 2026",
     description: "Join world-class developers, AI researchers, and tech founders for a 2-day conference on future tech trends.",
     category: "Technology",
-    date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 7 days from now
+    date: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), 
     location: "Auditorium A, Campus Center",
     capacity: 150,
     organizer: "Tech Council",
@@ -48,7 +48,6 @@ const seedDatabase = async () => {
     await mongoose.connect(process.env.MONGO_URI || "mongodb://localhost:27017/eventhub");
     console.log("Connected to MongoDB for seeding...");
 
-    // Clear existing events (optional) and insert sample data
     await Event.deleteMany({});
     await Event.insertMany(sampleEvents);
 

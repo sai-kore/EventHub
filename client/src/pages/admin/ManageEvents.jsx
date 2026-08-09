@@ -24,7 +24,7 @@ function ManageEvents() {
     loadEvents();
 
     return () => {
-      isMounted = false; // Cleanup flag
+      isMounted = false; 
     };
   }, []);
 
@@ -36,10 +36,8 @@ function ManageEvents() {
     try {
       await deleteEvent(id);
 
-      // Use functional update to avoid stale closure state
       setEvents((prevEvents) => prevEvents.filter((e) => e._id !== id));
     } catch (err) {
-      // Safely extract error message with fallback
       const errorMessage =
         err?.response?.data?.message ||
         "Failed to delete event. Please try again.";

@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import Layout from "../components/layout/Layout";
-import FeaturedEvents from "../components/common/FeaturedEvents"; // Adjust import path if needed
+import FeaturedEvents from "../components/common/FeaturedEvents"; 
 import { ShieldCheck, Zap, Ticket, Mail, Info, ArrowRight, Sparkles } from "lucide-react";
 import useAuth from "../hooks/useAuth";
 

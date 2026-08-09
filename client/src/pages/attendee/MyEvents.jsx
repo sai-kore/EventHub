@@ -24,7 +24,7 @@ function MyEvents() {
     loadRegistrations();
 
     return () => {
-      isMounted = false; // Cleanup flag
+      isMounted = false; 
     };
   }, []);
 

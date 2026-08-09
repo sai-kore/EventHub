@@ -7,10 +7,8 @@ function EditEvent() {
   const { id } = useParams();
   const navigate = useNavigate();
 
-  // 1. Initial state is null
   const [form, setForm] = useState(null);
 
-  // Load existing event data
   useEffect(() => {
     let isMounted = true;
 
@@ -18,7 +16,6 @@ function EditEvent() {
       try {
         const data = await getEventById(id);
         if (isMounted && data?.event) {
-          // Format date for <input type="date" /> if present
           const eventData = data.event;
           if (eventData.date) {
             eventData.date = new Date(eventData.date).toISOString().split("T")[0];
