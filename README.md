@@ -19,7 +19,7 @@ https://github.com/sai-kore/EventHub
 
 ```bash
 git clone https://github.com/sai-kore/EventHub.git
-cd EventHub/event-management-portal
+cd EventHub/
 ```
 
 2. Install dependencies:
@@ -39,18 +39,33 @@ npm run dev
 ```
 
 4. Start the frontend app:
+   Open new terminal tab and run
 
 ```bash
-cd ../client
+cd EventHub/
+cd ./client
 npm run dev
 ```
 
 ## Usage
 
-- Open the frontend URL shown by Vite (usually `http://localhost:5173`).
+- Open the frontend URL shown by Vite (`http://localhost:5173`).
 - Sign up as an attendee or log in using an existing account.
 - Admin users can access `/admin/dashboard` and manage events, users, and analytics.
 - Attendees can browse events, register, view `My Events`, and manage profiles.
+- Here are some existing accounts to login:
+<br>
+
+## Existing Accounts
+
+### Admin
+* **Email:** `sai@gmail.com`
+* **Password:** `123456`
+
+### Attendee
+* **Email:** `ben10@gmail.com`
+* **Password:** `123456`
+
 
 ## Notes
 
