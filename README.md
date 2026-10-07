@@ -11,7 +11,7 @@ https://github.com/sai-kore/EventHub
 - Admin dashboard with event analytics and user role management
 - Attendee event discovery, registration, and ticket management
 - Authentication using JWT and protected routes
-- Responsive layout with a modern UI
+- Responsive layout with a modern UI.
 
 ## Setup
 
