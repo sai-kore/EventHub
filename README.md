@@ -1,6 +1,6 @@
 # EventHub
 
-EventHub is a college event management portal built with React, Vite, Node.js and Express, and MongoDB. It supports role-based access for admins and attendees, event creation, registration, analytics, and profile management..
+EventHub is a college event management portal built with React, Vite, Node.js and Express, and MongoDB. It supports role-based access for admins and attendees, event creation, registration, analytics, and profile management.
 
 ## Repository
 
